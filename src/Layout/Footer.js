@@ -5,7 +5,7 @@ export class Footer extends Component {
     render() {  
         return ( 
           <div className="footer">
-          <MDBFooter backgroundColor='light' className='text-center text-lg-left'>
+          <MDBFooter backgroundcolor='light' className='text-center text-lg-left'>
           <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
             &copy; {new Date().getFullYear()} Copyright:{' '}
             <a className='text-dark' href='https://mdbootstrap.com/'>

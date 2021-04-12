@@ -1,7 +1,15 @@
-import React, { Component } from 'react'
-import { Link} from 'react-router-dom';  
-  
-export class Header extends Component {  
+import React, { Component , useState } from 'react' 
+import Search from '../indexation';
+export class Header extends Component { 
+  constructor(props) {
+    super(props);
+    //this.create= this.create.bind(this)
+    //this.onChangeTexte= this.onChangeTexte.bind(this)
+    this.state = {
+      search: null,
+    };
+  }
+
     render() {  
         return (  
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -27,9 +35,12 @@ export class Header extends Component {
                       <a className="nav-link" href="#">Contact</a>
                     </li>
                   </ul>
+                  
+                <Search/>
                 </div>
               </div>
             </nav>
+            
         )  
     }  
 }  

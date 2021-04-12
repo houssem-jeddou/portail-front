@@ -38,3 +38,25 @@ body {
     transform: rotate(360deg);
   }
 }
+.img1 {
+  margin: 10px;
+  position: relative;
+}
+.card my-4 {
+  padding-top: 3rem;
+  position: absolute;
+}
+.footer-content {
+  background-color: rgb(248, 232, 232);
+}
+.carddd {
+  display: flex;
+  justify-content: center;
+}
+.card-1 {
+  width: 50%;
+  margin: 5px;
+}
+.card-body {
+  background-color: rgb(241, 245, 251);
+}

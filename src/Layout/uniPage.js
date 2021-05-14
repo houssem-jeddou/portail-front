@@ -16,7 +16,6 @@ export class UniPage extends Component {
             pubs: null,
             isLoadingPub: true,
             errorMessagePub: '',
-
         };
     }
 
@@ -38,8 +37,9 @@ export class UniPage extends Component {
                     errorMessageUni: 'Something went wrong : ' + error.message
                 })
             })
-        //fetch pubs that are related to Uni . ==> portail 
-        axios.get(`http://localhost:5000/api/publication`)
+        //fetch pubs that are related to this Uni . ==> portail 
+        //we pass the uni id in the url 
+        axios.get(`http://localhost:5000/api/uniPub/${id}`)
             .then((response) => {
                 this.setState({
                     pubs: response.data,
@@ -97,21 +97,20 @@ export class UniPage extends Component {
                             </div>
                         </div>
 
-
                         <div style={{ margin: 30 + "px" }}>
 
                             <div className="card w-75" style={{ margin: "auto" }}>
                                 <div className="card-body">
                                     <h4 className="card-title p-2">Formations</h4>
                                     <div className="text-left ">
-                                        <p className="card-text">{this.state.uni.name} offre plusieurs types de formations dans des differents domaines: </p>
+                                        <p className="card-text">
+                                            {this.state.uni.name} offre plusieurs types de formations dans des differents domaines:
+                                        </p>
                                         <ul>
-
-
                                             {this.state.uni && this.state.uni.uniChoix.map((f, index) => {
                                                 return (
                                                     <li key={f.uniFormation._id}>
-                                                        <h5>{f.uniFormation.name}</h5>
+                                                        <h5>{f.uniFormation.name}</h5>!§:
                                                         <p>{f.uniFormation.description}</p>
 
                                                         <dl className="row">
@@ -163,20 +162,16 @@ export class UniPage extends Component {
                                                         texte={pub.texte}
                                                         date={pub.date}
                                                         comments={pub.comments}
-
                                                     />
                                                 );
                                             })}
-                                        </div>}
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
-
                     </div >
                 </div >
-
-
-
         )
     }
 }

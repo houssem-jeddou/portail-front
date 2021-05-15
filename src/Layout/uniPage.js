@@ -61,7 +61,7 @@ export class UniPage extends Component {
         return (
 
             (this.state.isLoadingUni) ?
-                <div className="d-flex justify-content-center" style={{ height: 1800 + "px" }}>
+                <div className="d-flex justify-content-center">
                     <MDBSpinner grow style={{
                         position: 'absolute', left: '50%', top: '50%',
                         transform: 'translate(-50%, -50%)'
@@ -149,22 +149,25 @@ export class UniPage extends Component {
                                             </div>
                                         </div>
                                         :
-
                                         <div className="card-columns  p-3" style={{ display: "inline-block" }} >
-                                            {this.state.pubs && this.state.pubs.map((pub, index) => {
-                                                //console.log(pub)
-                                                return (
+                                            {(this.state.pubs && this.state.pubs.length == 0)
+                                                ? <h5> No pubs found</h5>
+                                                :
+                                                this.state.pubs && this.state.pubs.map((pub, index) => {
+                                                    //console.log(pub)
+                                                    return (
 
-                                                    <PubCard
-                                                        key={pub._id}
-                                                        id={pub._id}
-                                                        author={pub.author.username}
-                                                        texte={pub.texte}
-                                                        date={pub.date}
-                                                        comments={pub.comments}
-                                                    />
-                                                );
-                                            })}
+                                                        <PubCard
+                                                            key={pub._id}
+                                                            id={pub._id}
+                                                            author={pub.author.username}
+                                                            texte={pub.texte}
+                                                            date={pub.date}
+                                                            comments={pub.comments}
+                                                        />
+                                                    );
+                                                })
+                                            }
                                         </div>
                                     }
                                 </div>

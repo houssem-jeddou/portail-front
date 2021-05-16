@@ -1,6 +1,7 @@
 import React, { Component } from 'react' 
 import axios from "axios"; 
 import { MDBSpinner ,MDBBtn, MDBIcon, MDBBadge} from 'mdb-react-ui-kit';
+import RightBar from './Rightbar'
   
 export class Home extends Component { 
   constructor(props) {
@@ -8,7 +9,7 @@ export class Home extends Component {
     this.onChangeTexte= this.onChangeTexte.bind(this)
     this.create= this.create.bind(this)
     this.state = {
-      books: null,
+      posts: null,
       selectedFile: null,
       addbloc:''
     };
@@ -18,8 +19,9 @@ export class Home extends Component {
 
 //data fetch
    async componentWillMount() {
-    const response = await axios.get("http://localhost:3001/api/publication")
-    this.setState({books: response.data})   
+    axios.defaults.withCredentials = true;
+    const response = await axios.get(`http://localhost:3000/api/publication`)
+    this.setState({posts: response.data})   
     } 
 
 // On file select (from the pop up)
@@ -47,27 +49,27 @@ export class Home extends Component {
       // Update the formData object
       formData.append("photo",this.state.selectedFile); 
       formData.append("texte",this.state.texte); 
-      formData.append("userId","le");    
+      formData.append("author","609495b265b4272914e4d63d");    
       formData.append("date",new Date());  
     }else{
       formData.append("texte",this.state.texte); 
-      formData.append("userId","le");    
-      formData.append("date",new Date()); 
+      formData.append("author","609495b265b4272914e4d63d");    
+      formData.append("date",new Date());
   }
     e.preventDefault();
     axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
-    axios.post("http://localhost:3001/api/publication",formData)
+    axios.post("http://localhost:3000/api/publication",formData)
     .then(response => {
         this.setState({
           _id: response.data._id,
           texte: response.data.texte,
-          userId: response.data.userId,
+          author: response.data.userId,
           date: response.data.date,
           photo: response.data.photo,
           published: response.data.published,
           submitted: true
         });
-        //console.log(response.headers);
+        
         this.setState({
           _id: "",
           texte: "",
@@ -104,129 +106,83 @@ export class Home extends Component {
 
 
     render() {
-      if (this.state.books==null) {
-        return (<div className="container">
+      if (this.state.posts==null) {
+        return (
+        <div className="container">
           <div style={{ paddingTop: '24%',paddingBottom: '21%'}}>
-      <MDBSpinner className='mx-2' color='info' style={{ width: '3rem', height: '3rem'}}>
-        <span className='visually-hidden'>loading...</span>
-      </MDBSpinner>
-       </div></div> );
+            <MDBSpinner className='mx-2' color='info' style={{ width: '3rem', height: '3rem'}}>
+              <span className='visually-hidden'>loading...</span>
+            </MDBSpinner>
+          </div>
+        </div> );
       }else  
         return ( 
           <React.Fragment>
-<div className="container">
-    <div className="row">
-      <div className="col-md-8">
-      <div className="card mb-4"  style={{ marginTop: '5%'}}>
-        <div className="book" >
-        <form encType="multipart/form-data">
-        <div className="card-body" style={{ padding: '0%'}}> 
-        <div className="card-textarea">
-        <div className="md-form">
-          
-        <textarea id="form7" className="md-textarea form-control" rows="3"  placeholder="Write something here..." required value={this.state.texte}
-        onChange={this.onChangeTexte}></textarea>
-        </div>
-        </div>
-        </div>
-        <div>
+          <div className="container">
+          <div className="row">
+          <div className="col-md-8">
+          <div className="card mb-4"  style={{ marginTop: '5%'}}>
+            <div className="book" >
+            <form encType="multipart/form-data">
+            <div className="card-body" style={{ padding: '0%'}}> 
+            <div className="card-textarea">
+            <div className="md-form">
+            <textarea id="form7" className="md-textarea form-control" rows="3"  placeholder="Write something here..." required 
+            value={this.state.texte} onChange={this.onChangeTexte}></textarea>
+            </div>
+            </div>
+            </div>
             <div>
+              <div>
                 <input type="file" ref={this.image} onChange={this.onFileChange} accept="image/*" hidden />
-            </div>
-        </div>
-        </form>
-        <div className="card-footer text-muted">
-        <MDBBtn rounded className='mx-2' color='info' onClick={this.onFileUpload}><MDBIcon icon='fas fa-camera'/>
-        {this.state.addbloc}
-        </MDBBtn>
-        <MDBBtn rounded className='mx-2' color='info' onClick={this.create}> Post</MDBBtn>
-        </div>
-        </div>
-        </div>
-
-        {this.state.books&&this.state.books.map((book , index)=> {
-          return (
-        <div className="card mb-4">
-          <div className="book" key={book._id}>
-            {book.photo?
-              <img className="card-img-top" src={`http://localhost:3001/${book.photo}`} alt={book.texte}/>
-              
-            :<span> </span>
-            }
-        <div className="card-body">
-            <p className="card-text">{book.texte}</p>
-          </div>
-          <div className="card-footer text-muted">
-            Posted on {this.displayDate(book.date)} by {book.userId}
-          </div>
-        </div>
-        </div>
-        
-                );
-              })}
-        <ul className="pagination justify-content-center mb-4">
-          <li className="page-item">
-            <a className="page-link" href="#">&larr; Older</a>
-          </li>
-          <li className="page-item disabled">
-            <a className="page-link" href="#">Newer &rarr;</a>
-          </li>
-        </ul>
-
-      </div>
-
-
-      <div className="col-md-4">
-        <div className="card my-4">
-          <h5 className="card-header">Categories</h5>
-          <div className="card-body">
-            <div className="row">
-              <div className="col-lg-6">
-                <ul className="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
-                </ul>
-              </div>
-              <div className="col-lg-6">
-                <ul className="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
-                  </li>
-                </ul>
               </div>
             </div>
+            </form>
+            <div className="card-footer text-muted">
+            <MDBBtn rounded className='mx-2' color='info' onClick={this.onFileUpload}><MDBIcon icon='fas fa-camera'/>
+            {this.state.addbloc}
+            </MDBBtn>
+            <MDBBtn rounded className='mx-2' color='info' onClick={this.create}> Post</MDBBtn>
+            </div>
+            </div>
+            </div>
+
+            {this.state.posts&&this.state.posts.map((post , index)=> {
+              return (
+            <div className="card mb-4">
+              <div className="post" key={post._id}>
+                {post.photo?
+                  <img className="card-img-top" src={`http://localhost:3000/${post.photo}`} alt={post.texte}/>
+                  
+                   :<span> </span>
+                }
+            <div className="card-body">
+                <p className="card-text">{post.texte}</p>
+            </div>
+            <div className="card-footer text-muted">
+                Posted on {this.displayDate(post.date)} by {post.author.username}
+            </div>
+            </div>
+            </div>
+                    );
+                  })}
+
+            <ul className="pagination justify-content-center mb-4">
+              <li className="page-item">
+                <a className="page-link" href="#">&larr; Older</a>
+              </li>
+              <li className="page-item disabled">
+                <a className="page-link" href="#">Newer &rarr;</a>
+              </li>
+            </ul>
           </div>
-        </div>
-
-        <div className="card my-4">
-          <h5 className="card-header">Side Widget</h5>
-          <div className="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+          <RightBar />
           </div>
-        </div>
-
-      </div>
-
-    </div>
-
-
-  </div>
-  </React.Fragment>
-  )  
-    }  }
+          </div>
+          </React.Fragment>
+        )  
+    }  
+  }
   
   
   export default Home 

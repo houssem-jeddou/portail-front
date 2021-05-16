@@ -20,7 +20,7 @@ export class Home extends Component {
 //data fetch
    async componentWillMount() {
     axios.defaults.withCredentials = true;
-    const response = await axios.get(`http://localhost:3000/api/publication`)
+    const response = await axios.get(`http://localhost:5000/api/publication`)
     this.setState({posts: response.data})   
     } 
 
@@ -58,7 +58,7 @@ export class Home extends Component {
   }
     e.preventDefault();
     axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
-    axios.post("http://localhost:3000/api/publication",formData)
+    axios.post("http://localhost:5000/api/publication",formData)
     .then(response => {
         this.setState({
           _id: response.data._id,
@@ -152,7 +152,7 @@ export class Home extends Component {
             <div className="card mb-4">
               <div className="post" key={post._id}>
                 {post.photo?
-                  <img className="card-img-top" src={`http://localhost:3000/${post.photo}`} alt={post.texte}/>
+                  <img className="card-img-top" src={`http://localhost:5000/${post.photo}`} alt={post.texte}/>
                   
                    :<span> </span>
                 }

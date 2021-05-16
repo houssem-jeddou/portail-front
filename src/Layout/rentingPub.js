@@ -7,7 +7,7 @@ function Renting () {
 
     useEffect(async () => {
       const result = await axios.get(
-        `http://localhost:3000/api/publication/renting`
+        `http://localhost:5000/api/publication/renting`
       );
       setData(result.data);
     },[]); 
@@ -22,7 +22,7 @@ function Renting () {
             <div className="card mb-4">
             <div className="item" key={item._id}>
               {item.photo?
-                <img className="card-img-top" src={`http://localhost:3000/${item.photo}`} alt={item.texte}/>
+                <img className="card-img-top" src={`http://localhost:5000/${item.photo}`} alt={item.texte}/>
                 
                  :<span> </span>
               }

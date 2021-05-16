@@ -1,5 +1,7 @@
+
 import React, { Component , useState } from 'react' 
 import Search from '../indexation';
+import { Link } from 'react-router-dom';
 export class Header extends Component { 
   constructor(props) {
     super(props);
@@ -29,7 +31,7 @@ export class Header extends Component {
                       <a className="nav-link" href="/formation">Formations</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="/institut">Instituts</a>
+                    <a className="nav-link" href="/unis">Instituts</a>
                     </li>
                   </ul>
                 <Search/>
@@ -42,3 +44,4 @@ export class Header extends Component {
 }  
   
 export default Header  
+

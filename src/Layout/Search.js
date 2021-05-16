@@ -26,7 +26,7 @@ for (var i=0;i<cookies.search.length;i++) {
   setCookie('search',['["fr",1]'], { path: '/',  expires}) */
     useEffect(async () => {
       const result = await axios.get(
-       `http://localhost:3000/api/publication/search/${cookies.search}`
+       `http://localhost:5000/api/publication/search/${cookies.search}`
       );
       setData(result.data);
     },[]); 
@@ -44,7 +44,7 @@ for (var i=0;i<cookies.search.length;i++) {
             <div className="card mb-4">
             <div className="item" key={item._id}>
               {item.photo?
-                <img className="card-img-top" src={`http://localhost:3000/${item.photo}`} alt={item.texte}/>
+                <img className="card-img-top" src={`http://localhost:5000/${item.photo}`} alt={item.texte}/>
                 
                  :<span> </span>
               }

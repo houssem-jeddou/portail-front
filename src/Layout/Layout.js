@@ -1,13 +1,17 @@
-import React, { Component} from 'react';  
-import Header from './Header'  
-import Footer from './Footer'  
+import React, { Component } from 'react';
+import Header from './Header'
+import Footer from './Footer'
 import Home from './Home'
+
 import Formation from './formation'
 import Institut from './institut'
 import Search from './Search'
 import Renting from './rentingPub'
 import Diploma from './diplomaPub'
-import { HashRouter, Route, Switch ,BrowserRouter as Router} from 'react-router-dom';  
+import UniPage from './uniPage'
+import UniOverview from '../component/uniOverview'
+import { HashRouter, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import PubPage from './pubPage';  
 export class Layout extends Component {  
     loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>  
     render() {  
@@ -38,6 +42,15 @@ export class Layout extends Component {
           <Route path="/diplomaandqualification">
             <Diploma />
           </Route>
+          <Route path="/unis/:id"
+                    component={(props) => <UniPage {...props} />}
+                  />
+                  <Route path="/unis">
+                    <UniOverview />
+                  </Route>
+                  <Route path="/publication/:id"
+                    component={(props) => <PubPage {...props} />}
+                  />
         </Switch>
     </Router> 
     

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { MDBSpinner } from 'mdb-react-ui-kit';
 import axios from 'axios';
 import { PubCard } from './../component/pubCard';
+import RightBar from './Rightbar'
 
 
 export class UniPage extends Component {
@@ -175,6 +176,7 @@ export class UniPage extends Component {
                         </div>
                     </div >
                 </div >
+                
         )
     }
 }

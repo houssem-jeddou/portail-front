@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { MDBSpinner } from 'mdb-react-ui-kit';
 import axios from 'axios';
 import { PubCard } from './../component/pubCard';
-
+import RightBar from './Rightbar'
 export class PubPage
     extends Component {
 
@@ -36,7 +36,11 @@ export class PubPage
 
     componentWillMount() {
         const id = this.props.match.params.id
+
         axios.get(`http://localhost:3001/api/publication/${id}`)
+
+//         axios.get(`http://localhost:5000/api/publication/get/${id}`)
+
 
             .then((response) => {
                 this.setState({
@@ -111,7 +115,9 @@ export class PubPage
                             </div>
                         </div>
                     </div>
+                   
                 </div >
+                
         )
     }
 }

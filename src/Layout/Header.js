@@ -1,37 +1,47 @@
-import React, { Component } from 'react'
+
+import React, { Component , useState } from 'react' 
+import Search from '../indexation';
 import { Link } from 'react-router-dom';
-
-export class Header extends Component {
-  render() {
-    return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div className="container">
-          <a className="navbar-brand" href="#">Orientation</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarResponsive">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="/">Home
-                        <span className="sr-only">(current)</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/profile">Publier</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/unis">Institut</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    )
+export class Header extends Component { 
+  constructor(props) {
+    super(props);
+    //this.create= this.create.bind(this)
+    //this.onChangeTexte= this.onChangeTexte.bind(this)
+    this.state = {
+      search: null,
+    };
   }
-}
 
-export default Header
+    render() {  
+        return (  
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+              <div className="container">
+                <a className="navbar-brand" href="#">Orientation</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarResponsive">
+                  <ul className="navbar-nav ml-auto">
+                    <li className="nav-item active">
+                      <a className="nav-link" href="/">Accueil
+                        <span className="sr-only">(current)</span>
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="/formation">Formations</a>
+                    </li>
+                    <li className="nav-item">
+                    <a className="nav-link" href="/unis">Instituts</a>
+                    </li>
+                  </ul>
+                <Search/>
+                </div>
+              </div>
+            </nav>
+            
+        )  
+    }  
+}  
+  
+export default Header  
+

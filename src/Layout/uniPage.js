@@ -22,7 +22,7 @@ export class UniPage extends Component {
     componentWillMount() {
         const id = this.props.match.params.id
         //fetch uni 
-        axios.get(`http://localhost:5000/api/uni/${id}`)
+        axios.get(`http://localhost:3001/api/uni/${id}`)
 
             .then((response) => {
                 this.setState({
@@ -39,7 +39,7 @@ export class UniPage extends Component {
             })
         //fetch pubs that are related to this Uni . ==> portail 
         //we pass the uni id in the url 
-        axios.get(`http://localhost:5000/api/uniPub/${id}`)
+        axios.get(`http://localhost:3001/api/uniPub/${id}`)
             .then((response) => {
                 this.setState({
                     pubs: response.data,

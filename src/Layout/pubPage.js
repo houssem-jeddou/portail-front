@@ -36,7 +36,11 @@ export class PubPage
 
     componentWillMount() {
         const id = this.props.match.params.id
-        axios.get(`http://localhost:5000/api/publication/get/${id}`)
+
+        axios.get(`http://localhost:3001/api/publication/${id}`)
+
+//         axios.get(`http://localhost:5000/api/publication/get/${id}`)
+
 
             .then((response) => {
                 this.setState({

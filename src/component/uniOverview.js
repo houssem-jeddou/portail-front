@@ -16,7 +16,7 @@ export class UniOverview extends Component {
   }
 
   componentWillMount() {
-    axios.get("http://localhost:5000/api/uni")
+    axios.get("http://localhost:3001/api/uni")
 
       .then((response) => {
         this.setState({
